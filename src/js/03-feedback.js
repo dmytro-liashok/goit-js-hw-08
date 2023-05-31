@@ -12,7 +12,12 @@ textOutput();
 function inputOn(event) {
   user[event.target.name] = event.target.value;
 
-  localStorage.setItem('feedback-form-state', JSON.stringify(user));
+  const saveUser =
+    JSON.parse(localStorage.getItem('feedback-form-state')) ?? {};
+
+  let mergeUser = { ...saveUser, ...user };
+
+  localStorage.setItem('feedback-form-state', JSON.stringify(mergeUser));
 }
 
 function submitOn(event) {
